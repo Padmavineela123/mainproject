@@ -74,6 +74,13 @@ function Login() {
         JSON.stringify(data.user)
       );
 
+      if (data.user?.role === "admin") {
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("adminUser", JSON.stringify(data.user));
+        navigate("/admin");
+        return;
+      }
+
       // Go to dashboard
       navigate("/dashboard");
     } catch (error) {
