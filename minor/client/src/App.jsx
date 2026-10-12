@@ -41,17 +41,36 @@ function RequireAuth({ children }) {
     return <Navigate to="/login" replace />;
   }
 
+  try {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (user.role === "admin") {
+      return <Navigate to="/admin" replace />;
+    }
+  } catch {
+    // ignore parse error
+  }
+
   return children;
 }
 
 function RequireAdmin({ children }) {
   const adminToken =
     typeof localStorage !== "undefined"
-      ? localStorage.getItem("adminToken")
+      ? localStorage.getItem("adminToken") || localStorage.getItem("token")
       : null;
 
-  if (!adminToken) {
-    return <Navigate to="/admin/login" replace />;
+  try {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const adminUser = JSON.parse(localStorage.getItem("adminUser") || "{}");
+    const isAdmin = user.role === "admin" || adminUser.role === "admin";
+
+    if (!adminToken || !isAdmin) {
+      return <Navigate to="/admin/login" replace />;
+    }
+  } catch {
+    if (!adminToken) {
+      return <Navigate to="/admin/login" replace />;
+    }
   }
 
   return children;
@@ -62,6 +81,20 @@ function RedirectIfAuthenticated({ children }) {
     typeof localStorage !== "undefined"
       ? localStorage.getItem("token")
       : null;
+  const adminToken =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("adminToken")
+      : null;
+
+  try {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const adminUser = JSON.parse(localStorage.getItem("adminUser") || "{}");
+    if (adminToken || user.role === "admin" || adminUser.role === "admin") {
+      return <Navigate to="/admin" replace />;
+    }
+  } catch {
+    // fallback
+  }
 
   if (token) {
     return <Navigate to="/dashboard" replace />;

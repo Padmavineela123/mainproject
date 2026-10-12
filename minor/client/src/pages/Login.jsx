@@ -41,7 +41,9 @@ function Login() {
 
         localStorage.setItem("adminToken", data.token);
         localStorage.setItem("adminUser", JSON.stringify(data.admin));
-        navigate("/admin");
+        localStorage.setItem("user", JSON.stringify({ ...data.admin, role: "admin" }));
+        localStorage.setItem("token", data.token);
+        window.location.href = "/admin";
         return;
       }
 
@@ -77,7 +79,7 @@ function Login() {
       if (data.user?.role === "admin") {
         localStorage.setItem("adminToken", data.token);
         localStorage.setItem("adminUser", JSON.stringify(data.user));
-        navigate("/admin");
+        window.location.href = "/admin";
         return;
       }
 
