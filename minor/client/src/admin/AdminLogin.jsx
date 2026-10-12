@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Brain, ShieldCheck, LogIn } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./admin.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -88,9 +88,21 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        <p className="admin-auth-note">
-          This is a separate administrator area. Student login remains unchanged.
-        </p>
+        <div style={{ marginTop: "18px", textAlign: "center" }}>
+          <Link
+            to="/login"
+            style={{
+              color: "#64748b",
+              fontSize: "13px",
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#38bdf8")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#64748b")}
+          >
+            ← Back to Student Login
+          </Link>
+        </div>
       </div>
     </div>
   );
