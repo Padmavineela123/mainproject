@@ -1,0 +1,19 @@
+AI Interview Prep - Admin/Profile Fix
+
+Changes in this version:
+1. Student dashboard now has a working Student dropdown in the top-right.
+   - Profile
+   - Settings
+   - Logout
+2. Settings is linked from the dashboard sidebar and dropdown.
+3. Logout clears the student token/session and returns to /login.
+4. /api/auth/me now returns the current user's name/email from MongoDB.
+   This fixes the profile/dashboard user information becoming blank after login.
+5. Profile now loads the logged-in user and test history from the backend.
+6. Profile editing now saves name/email to MongoDB.
+7. Existing admin panel and student test pages were kept in place.
+
+IMPORTANT:
+- node_modules and server/.env are intentionally not included in this ZIP.
+- Run npm install in both client and server.
+- Restore/create server/.env using your existing MongoDB/JWT/admin settings or server/.env.example.

@@ -1,0 +1,1560 @@
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.technical-layout {
+  min-height: 100vh;
+  background-color: #060a19;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.14) 0%, transparent 40%),
+    radial-gradient(circle at 50% 70%, rgba(6, 182, 212, 0.09) 0%, transparent 50%);
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.technical-navbar {
+  height: 86px;
+  background: rgba(6, 10, 25, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 28px;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 50;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+
+.technical-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.technical-logo {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+}
+
+.technical-logo-area h2 {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.technical-logo-area span {
+  display: block;
+
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+
+  margin-top: 3px;
+}
+
+.technical-menu-button {
+  position: absolute;
+  left: 300px;
+
+  border: none;
+  background: transparent;
+
+  color: #cbd5e1;
+
+  cursor: pointer;
+}
+
+.technical-user-area {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.technical-notification {
+  position: relative;
+
+  font-size: 22px;
+  color: #cbd5e1;
+}
+
+.notification-number {
+  position: absolute;
+
+  top: -8px;
+  right: -8px;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+  color: white;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.technical-avatar {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+}
+
+.technical-user-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.technical-user-text strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.technical-user-text span {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* =====================================================
+   PROFILE DROPDOWN
+===================================================== */
+
+.technical-profile-wrapper {
+  position: relative;
+}
+
+.technical-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+}
+
+.technical-chevron {
+  color: #94a3b8;
+  transition: transform 0.25s ease;
+}
+
+.technical-chevron.open {
+  transform: rotate(180deg);
+  color: #38bdf8;
+}
+
+.technical-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: 240px;
+  background: rgba(10, 17, 40, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65),
+              0 0 0 1px rgba(99, 102, 241, 0.1);
+  z-index: 999;
+  animation: techDropdownOpen 0.18s ease;
+}
+
+@keyframes techDropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.technical-dropdown-user {
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+}
+
+.technical-dropdown-user strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 3px;
+}
+
+.technical-dropdown-user span {
+  display: block;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.technical-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.technical-dropdown-item:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #ffffff;
+}
+
+.technical-dropdown-logout {
+  color: #f87171;
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0 0 10px 10px;
+  padding-top: 12px;
+}
+
+.technical-dropdown-logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.technical-sidebar {
+  position: fixed;
+
+  top: 72px;
+  left: 0;
+  bottom: 0;
+
+  width: 245px;
+
+  background: #0a1128;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 50%);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 16px 14px 14px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  z-index: 900;
+}
+
+.tech-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tech-side-item {
+  position: relative;
+
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px 13px;
+
+  border-radius: 9px;
+
+  color: #cbd5e1;
+
+  text-decoration: none;
+
+  font-size: 13.5px;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.tech-side-item:hover {
+  background: rgba(99, 102, 241, 0.15);
+  color: #ffffff;
+}
+
+.tech-active {
+  background: rgba(99, 102, 241, 0.22);
+  color: #a5b4fc;
+  font-weight: 700;
+}
+
+.tech-logout {
+  color: #f87171;
+}
+
+.tech-logout:hover {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #fca5a5 !important;
+}
+
+/* Journey Card */
+.tech-journey {
+  margin: auto 4px 0;
+  padding: 13px 15px;
+  text-align: center;
+  background: rgba(14, 23, 49, 0.8);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 14px;
+}
+
+.tech-journey-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 22px;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+}
+
+.tech-journey p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #94a3b8;
+  margin: 0 0 10px;
+}
+
+.tech-journey-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.35);
+}
+
+.tech-journey-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+
+
+
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.technical-content {
+  margin-left: 245px;
+
+  padding: 28px 26px 50px;
+
+  min-height: calc(100vh - 72px);
+}
+
+.technical-content--full {
+  margin-left: 0;
+}
+
+
+/* =====================================================
+   BREADCRUMB
+===================================================== */
+
+.technical-breadcrumb {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+}
+
+.technical-breadcrumb a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.technical-breadcrumb a:hover {
+  color: #7dd3fc;
+  text-decoration: underline;
+}
+
+.technical-breadcrumb span {
+  color: #64748b;
+}
+
+.technical-breadcrumb strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.technical-hero {
+  background: rgba(10, 17, 40, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 18px;
+
+  padding: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 145px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35);
+
+  margin-bottom: 25px;
+}
+
+.technical-hero-left {
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.technical-hero-icon {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #38bdf8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+}
+
+.technical-hero h1 {
+  margin: 0 0 8px;
+
+  font-size: 29px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.technical-hero p {
+  margin: 0;
+
+  color: #cbd5e1;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.technical-hero-image {
+  color: rgba(99, 102, 241, 0.35);
+
+  padding-right: 30px;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.technical-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 30px;
+}
+
+.technical-stat-card {
+  background: rgba(14, 23, 49, 0.7);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 14px;
+
+  min-height: 82px;
+
+  padding: 17px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.technical-stat-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.technical-stat-icon.purple {
+  background: rgba(168, 85, 247, 0.16);
+  color: #c084fc;
+}
+
+.technical-stat-icon.blue {
+  background: rgba(59, 130, 246, 0.16);
+  color: #60a5fa;
+}
+
+.technical-stat-icon.green {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+}
+
+.technical-stat-icon.orange {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+}
+
+.technical-stat-card strong {
+  display: block;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.technical-stat-card span {
+  display: block;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #94a3b8;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.technical-section-title {
+  margin-bottom: 22px;
+}
+
+.technical-section-title h2 {
+  margin: 0 0 7px;
+
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.technical-section-title p {
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #94a3b8;
+}
+
+
+/* =====================================================
+   TECHNICAL CARDS
+===================================================== */
+
+.technical-card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+.technical-card {
+  background: rgba(14, 23, 49, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 18px;
+
+  padding: 28px;
+
+  min-height: 270px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #6366f1;
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.technical-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.5);
+}
+
+.java-card {
+  border-top-color: #f58220;
+}
+
+.python-card {
+  border-top-color: #38bdf8;
+}
+
+.dsa-card {
+  border-top-color: #10b981;
+}
+
+.technical-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.technical-card-icon {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 15px;
+
+  background: rgba(99, 102, 241, 0.16);
+  color: #818cf8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.java-card .technical-card-icon {
+  background: rgba(245, 130, 32, 0.16);
+  color: #fb923c;
+  border-color: rgba(245, 130, 32, 0.25);
+}
+
+.python-card .technical-card-icon {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.dsa-card .technical-card-icon {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.technical-card-top>span {
+  background: rgba(99, 102, 241, 0.18);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+
+  color: #c7d2fe;
+
+  border-radius: 20px;
+
+  padding: 8px 15px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.java-card .technical-card-top>span {
+  background: rgba(245, 130, 32, 0.18);
+  border-color: rgba(245, 130, 32, 0.35);
+  color: #fed7aa;
+}
+
+.python-card .technical-card-top>span {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+}
+
+.dsa-card .technical-card-top>span {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #a7f3d0;
+}
+
+.technical-card h2 {
+  margin: 0 0 8px;
+
+  font-size: 21px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.technical-card p {
+  margin: 0 0 16px;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  line-height: 1.55;
+}
+
+.technical-card-info {
+  display: flex;
+
+  gap: 25px;
+
+  margin-bottom: 22px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.technical-start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  min-width: 150px;
+  padding: 10px 18px;
+  margin-top: 8px;
+  border: 1.5px solid #6366f1;
+  border-radius: 9px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #c7d2fe;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.technical-start-button svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.c-card .technical-start-button {
+  color: #a5b4fc;
+  border-color: #6366f1;
+}
+
+.c-card .technical-start-button:hover {
+  background: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.5);
+  transform: translateY(-2px);
+}
+
+.c-card .technical-start-button:hover svg {
+  transform: translateX(3px);
+}
+
+.java-card .technical-start-button {
+  color: #fdba74;
+  border-color: #f58220;
+  background: rgba(245, 130, 32, 0.1);
+}
+
+.java-card .technical-start-button:hover {
+  background: #f58220;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(245, 130, 32, 0.5);
+  transform: translateY(-2px);
+}
+
+.java-card .technical-start-button:hover svg {
+  transform: translateX(3px);
+}
+
+.python-card .technical-start-button {
+  color: #7dd3fc;
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.python-card .technical-start-button:hover {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+  transform: translateY(-2px);
+}
+
+.python-card .technical-start-button:hover svg {
+  transform: translateX(3px);
+}
+
+.dsa-card .technical-start-button {
+  color: #6ee7b7;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.dsa-card .technical-start-button:hover {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
+}
+
+.dsa-card .technical-start-button:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* =====================================================
+   QUESTION TIMER
+===================================================== */
+
+.technical-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 14px;
+  border-radius: 12px;
+}
+
+.technical-timer svg {
+  color: #38bdf8;
+}
+
+.technical-timer small {
+  display: block;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.technical-timer strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.question-menu-button {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.question-menu-button:hover {
+  opacity: 0.9;
+  transform: scale(1.04);
+}
+
+
+/* =====================================================
+   QUESTION PANEL
+===================================================== */
+
+.technical-question-panel {
+  position: fixed;
+  top: 86px;
+  right: 0;
+  width: 340px;
+  height: calc(100vh - 86px);
+  background: #0a1128;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  padding: 24px 22px;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.question-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.question-panel-header h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.question-panel-header p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.question-panel-header button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.question-panel-header button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   QUESTION GRID
+===================================================== */
+
+.technical-question-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+.technical-question-number {
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(14, 23, 49, 0.85);
+  color: #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.technical-question-number:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+}
+
+
+/* =====================================================
+   ANSWERED QUESTION - FULL GREEN
+===================================================== */
+
+.technical-question-number.answered {
+  background: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+.technical-question-number.answered:hover {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   ACTIVE QUESTION - FULL PURPLE
+===================================================== */
+
+.technical-question-number.active {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
+  border-color: #818cf8;
+  font-weight: 800;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.5);
+}
+
+
+/* =====================================================
+   ACTIVE + ANSWERED
+   KEEP PURPLE
+===================================================== */
+
+.technical-question-number.active.answered {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
+  border-color: #818cf8;
+}
+
+
+/* =====================================================
+   QUESTION STATUS LEGEND
+   NOW BELOW QUESTION NUMBERS
+===================================================== */
+
+.question-status-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 0 5px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-dot.correct {
+  background: #6366f1;
+}
+
+.legend-dot.answered {
+  background: #10b981;
+}
+
+.legend-box.unanswered {
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(14, 23, 49, 0.9);
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-dot.review {
+  background: #f59e0b;
+}
+
+
+/* =====================================================
+   QUESTION HEADER
+===================================================== */
+
+.technical-progress {
+  min-width: 190px;
+}
+
+.technical-progress span {
+  display: block;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.technical-progress strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 10px;
+  transition: width 0.3s;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.technical-question-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 10px 0 20px;
+  margin-top: 20px;
+  box-shadow: none;
+}
+
+.question-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.question-count {
+  background: rgba(99, 102, 241, 0.18);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #c7d2fe;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.technical-section-badge {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.topic-name {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.technical-question-card h2 {
+  font-size: 23px;
+  line-height: 1.5;
+  margin: 0 0 25px;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.technical-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.technical-option {
+  width: 100%;
+  min-height: 60px;
+  background: rgba(14, 23, 49, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.technical-option:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(20, 32, 68, 0.9);
+  transform: translateX(4px);
+}
+
+.technical-option.selected {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.option-letter {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #e2e8f0;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.selected .option-letter {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+}
+
+.option-value {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.45;
+}
+
+.selected-check {
+  color: #38bdf8;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.technical-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+}
+
+.previous-button,
+.next-button,
+.submit-button {
+  border: none;
+  border-radius: 10px;
+  min-height: 46px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.previous-button {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
+}
+
+.previous-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.previous-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.next-button {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: white;
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.4);
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.4);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+}
+
+.answer-status {
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   EMPTY & LOADING
+===================================================== */
+
+.technical-empty {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #060a19;
+  color: #ffffff;
+}
+
+.technical-empty h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.technical-empty p {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.technical-empty a {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #38bdf8;
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 10px 18px;
+  border-radius: 9px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  transition: all 0.2s ease;
+}
+
+.technical-empty a:hover {
+  background: rgba(56, 189, 248, 0.2);
+  transform: translateY(-2px);
+}
+
+.technical-loading-icon {
+  color: #38bdf8;
+  margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .technical-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .technical-card-grid {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+
+@media (max-width: 800px) {
+
+  .technical-sidebar {
+    display: none;
+  }
+
+  .technical-content {
+    margin-left: 0;
+
+    padding: 20px;
+  }
+
+  .technical-menu-button {
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+  .technical-hero {
+    padding: 25px;
+  }
+
+  .technical-hero-image {
+    display: none;
+  }
+
+  .technical-question-panel {
+    width: 320px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .technical-stats {
+    grid-template-columns:
+      1fr;
+  }
+
+  .technical-card-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .technical-user-text {
+    display: none;
+  }
+
+  .technical-hero-left {
+    align-items: flex-start;
+  }
+
+  .technical-question-card {
+    padding: 10px 0 20px;
+  }
+
+  .question-card-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .technical-bottom {
+    gap: 10px;
+
+    flex-wrap: wrap;
+  }
+
+  .question-status-legend {
+    gap: 12px;
+
+    justify-content: flex-start;
+  }
+
+  .technical-question-panel {
+    width: calc(100vw - 30px);
+
+    max-width: 340px;
+  }
+}

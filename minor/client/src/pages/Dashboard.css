@@ -1,0 +1,1296 @@
+/* =========================================================
+   AI INTERVIEW PREP - DASHBOARD
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.dashboard {
+    min-height: 100vh;
+    background-color: #060a19;
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 50% 70%, rgba(6, 182, 212, 0.09) 0%, transparent 50%);
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   TOP NAVBAR
+   ========================================================= */
+
+.top-navbar {
+    height: 72px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    background: rgba(6, 10, 25, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+    color: #ffffff;
+
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+}
+
+.brand-icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+.brand-section h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 800;
+
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   MENU BUTTON
+   ========================================================= */
+
+.menu-button {
+    width: 40px;
+    height: 40px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+
+    border-radius: 9px;
+
+    color: #cbd5e1;
+
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   NAVBAR RIGHT
+   ========================================================= */
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+   ========================================================= */
+
+.notification {
+    width: 42px;
+    height: 42px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #cbd5e1;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.notification:hover {
+    background: rgba(99, 102, 241, 0.18);
+    color: #ffffff;
+}
+
+.notification span {
+    position: absolute;
+
+    top: 1px;
+    right: 1px;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ef4444;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STUDENT PROFILE
+   ========================================================= */
+
+.student-profile-wrapper {
+    position: relative;
+}
+
+.student-profile {
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+}
+
+.profile-chevron {
+    transition: transform 0.2s ease;
+    color: #94a3b8;
+}
+
+.profile-chevron.open {
+    transform: rotate(180deg);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 235px;
+    padding: 8px;
+    background: #0a1128;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    z-index: 1200;
+}
+
+.profile-dropdown-user {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 11px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-dropdown-user strong {
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 700;
+}
+
+.profile-dropdown-user span {
+    color: #94a3b8;
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 11px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s ease;
+}
+
+.profile-dropdown-item:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: #ffffff;
+}
+
+.logout-dropdown-item:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+
+.student-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 5px 8px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.student-profile:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-text strong {
+    color: #ffffff;
+
+    font-size: 13.5px;
+    font-weight: 700;
+}
+
+.profile-text small {
+    margin-top: 2px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+.student-profile>svg {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 72px;
+    left: 0;
+    bottom: 0;
+
+    width: 245px;
+
+    padding: 16px 14px 14px;
+
+    background: #0a1128;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 50%);
+
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+/* =========================================================
+   SIDEBAR ITEM
+   ========================================================= */
+
+.sidebar-item {
+    min-height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 13px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-size: 13.5px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.sidebar-item svg {
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+}
+
+.sidebar-item:hover {
+    background: rgba(99, 102, 241, 0.15);
+
+    color: #ffffff;
+}
+
+.sidebar-item.active {
+    background: rgba(99, 102, 241, 0.22);
+
+    color: #a5b4fc;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.sidebar-item.logout {
+    margin-top: 4px;
+}
+
+.sidebar-item.logout:hover {
+    background: rgba(239, 68, 68, 0.12);
+    color: #fca5a5;
+}
+
+
+/* =========================================================
+   JOURNEY CARD
+   ========================================================= */
+
+.journey-card {
+    margin-top: auto;
+
+    padding: 13px 15px;
+
+    background: rgba(14, 23, 49, 0.8);
+
+    border: 1px solid rgba(99, 102, 241, 0.25);
+
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+.journey-icon {
+    width: 50px;
+    height: 50px;
+
+    margin: 0 auto 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+    color: #ffffff;
+
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+}
+
+.journey-card p {
+    margin: 0 0 10px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.journey-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 10px;
+
+    background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.35);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.journey-button:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - 245px);
+
+    margin-left: 245px;
+
+    padding: 108px 40px 45px;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.welcome-section {
+    min-height: 175px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 28px 32px;
+
+    margin-bottom: 26px;
+
+    background: rgba(14, 23, 49, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.welcome-content {
+    flex: 1;
+}
+
+.welcome-content h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 29px;
+    line-height: 1.25;
+
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.welcome-content p {
+    margin: 9px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   WELCOME ILLUSTRATION
+   ========================================================= */
+
+.welcome-illustration {
+    width: 245px;
+    height: 125px;
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+.illustration-chart {
+    position: absolute;
+
+    top: 10px;
+    right: 48px;
+
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+
+    color: #38bdf8;
+
+    border-radius: 17px;
+
+    transform: rotate(-4deg);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+}
+
+
+/* ---------- PERSON ---------- */
+
+.person {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 75px;
+    height: 92px;
+}
+
+.person-head {
+    width: 34px;
+    height: 34px;
+
+    margin: 0 auto;
+
+    background: #f1c5a2;
+
+    border-radius: 50%;
+}
+
+.person-body {
+    width: 64px;
+    height: 50px;
+
+    margin: 4px auto 0;
+
+    background: #6256e8;
+
+    border-radius: 22px 22px 8px 8px;
+}
+
+
+/* ---------- PLANT ---------- */
+
+.plant {
+    position: absolute;
+
+    left: 10px;
+    bottom: 3px;
+
+    font-size: 35px;
+}
+
+
+/* =========================================================
+   MODULE GRID
+   ========================================================= */
+
+.module-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   MODULE CARD
+   ========================================================= */
+
+.module-card {
+    min-width: 0;
+    min-height: 230px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px;
+
+    background: rgba(14, 23, 49, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   MODULE ICON
+   ========================================================= */
+
+.module-icon {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 14px;
+}
+
+.module-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+
+/* =========================================================
+   MODULE TITLES
+   ========================================================= */
+
+.module-card h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18.5px;
+    font-weight: 800;
+}
+
+.module-card p {
+    margin: 8px 0 18px;
+
+    color: #cbd5e1;
+
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   MODULE BUTTON
+   ========================================================= */
+
+.module-button {
+    margin-top: auto;
+
+    width: fit-content;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color: #38bdf8;
+
+    text-decoration: none;
+
+    font-size: 12.5px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.module-button:hover {
+    color: #7dd3fc;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   MODULE COLORS
+   ========================================================= */
+
+.aptitude-card .module-icon {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.technical-card .module-icon {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.coding-card .module-icon {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.hr-card .module-icon {
+    background: rgba(236, 72, 153, 0.2);
+    color: #f472b6;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+
+/* =========================================================
+   BOTTOM GRID
+   ========================================================= */
+
+.bottom-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1.45fr) minmax(300px, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   INFO CARD
+   ========================================================= */
+
+.info-card {
+    min-width: 0;
+
+    padding: 24px;
+
+    background: rgba(14, 23, 49, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.info-card h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18.5px;
+    font-weight: 800;
+}
+
+.heading-line {
+    width: 40px;
+    height: 3px;
+
+    margin-top: 9px;
+    margin-bottom: 22px;
+
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+   ========================================================= */
+
+.steps {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 8px;
+}
+
+.step {
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: center;
+}
+
+.step-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.step-icon.purple {
+    background: rgba(99, 102, 241, 0.18);
+    color: #a5b4fc;
+}
+
+.step-icon.blue {
+    background: rgba(56, 189, 248, 0.18);
+    color: #38bdf8;
+}
+
+.step-icon.green {
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+}
+
+.step-icon.orange {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fbbf24;
+}
+
+.step h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 12.5px;
+    font-weight: 800;
+}
+
+.step p {
+    margin: 7px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.step-arrow {
+    flex-shrink: 0;
+
+    padding-top: 17px;
+
+    color: #64748b;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   WHY CHOOSE US
+   ========================================================= */
+
+.why-card {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 18px;
+}
+
+.why-card>div:first-child {
+    flex: 1;
+}
+
+.benefits {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.benefits li {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #cbd5e1;
+
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.benefits li svg {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #34d399;
+}
+
+
+/* =========================================================
+   ROBOT
+   ========================================================= */
+
+.robot {
+    width: 85px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.robot-face {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(99, 102, 241, 0.15);
+
+    border: 1px solid rgba(99, 102, 241, 0.35);
+
+    border-radius: 20px;
+
+    font-size: 38px;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.35);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.main-content footer {
+    width: 100%;
+
+    padding: 12px 0 5px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #d8dbe3;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .module-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .top-navbar {
+        padding: 0 20px;
+    }
+
+    .menu-button {
+        display: flex;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        width: calc(100% - 220px);
+
+        margin-left: 220px;
+
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .welcome-section {
+        padding: 24px;
+    }
+
+    .welcome-content h1 {
+        font-size: 25px;
+    }
+}
+
+
+/* =========================================================
+   700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .top-navbar {
+        height: 66px;
+
+        padding: 0 14px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .brand-section h2 {
+        font-size: 15px;
+    }
+
+    .menu-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .profile-text,
+    .student-profile>svg {
+        display: none;
+    }
+
+    .navbar-right {
+        gap: 5px;
+    }
+
+    .profile-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .sidebar {
+        top: 66px;
+
+        width: 245px;
+
+        left: -245px;
+
+        transition: left 0.25s ease;
+    }
+
+    .main-content {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 91px 16px 35px;
+    }
+
+    .welcome-section {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 22px;
+    }
+
+    .welcome-content h1 {
+        font-size: 23px;
+    }
+
+    .welcome-illustration {
+        width: 100%;
+    }
+
+    .module-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 18px;
+    }
+
+    .step {
+        width: 100%;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+
+        padding: 0;
+    }
+
+    .why-card {
+        flex-direction: column;
+    }
+
+    .robot {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   450px
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .top-navbar {
+        padding: 0 10px;
+    }
+
+    .brand-section {
+        gap: 7px;
+    }
+
+    .brand-section h2 {
+        font-size: 14px;
+    }
+
+    .notification {
+        width: 34px;
+        height: 34px;
+    }
+
+    .main-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .welcome-section {
+        padding: 19px;
+    }
+
+    .welcome-content h1 {
+        font-size: 21px;
+    }
+
+    .module-card {
+        min-height: 215px;
+
+        padding: 20px;
+    }
+
+    .info-card {
+        padding: 20px;
+    }
+}
