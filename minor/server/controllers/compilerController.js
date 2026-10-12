@@ -10,11 +10,16 @@ import Question from "../models/Question.js";
 ========================================================= */
 
 const GCC_PATH =
-  process.env.GCC_PATH || "C:\\msys64\\ucrt64\\bin\\gcc.exe";
+  process.platform === "win32"
+    ? (process.env.GCC_PATH || "C:\\msys64\\ucrt64\\bin\\gcc.exe")
+    : (process.env.GCC_PATH || "gcc");
 
 const JAVA_COMPILER = "javac";
 const JAVA_RUNNER = "java";
-const PYTHON_RUNNER = "python";
+const PYTHON_RUNNER =
+  process.platform === "win32"
+    ? "python"
+    : (process.env.PYTHON_RUNNER || "python3");
 
 
 /* =========================================================
@@ -301,7 +306,7 @@ export const runCodingCode = async (req, res) => {
 
       const exePath = path.join(
         workDir,
-        "main.exe"
+        process.platform === "win32" ? "main.exe" : "main.out"
       );
 
       await fs.writeFile(
