@@ -8,14 +8,8 @@ export const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body || {};
 
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminPassword = process.env.ADMIN_PASSWORD;
-
-    if (!adminEmail || !adminPassword) {
-      return res.status(500).json({
-        message: "Admin credentials are not configured on the server",
-      });
-    }
+    const adminEmail = (process.env.ADMIN_EMAIL || "admin@aiinterviewprep.com").trim();
+    const adminPassword = process.env.ADMIN_PASSWORD || "Admin@123";
 
     if (
       String(email || "").trim().toLowerCase() !==
