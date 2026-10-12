@@ -3,6 +3,7 @@ import {
   signup,
   login,
   updateProfile,
+  resetPassword,
 } from "../controllers/authController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -10,6 +11,7 @@ const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.post("/reset-password", resetPassword);
 
 router.get("/me", authMiddleware, async (req, res) => {
   // The JWT only contains id/role. Fetch the current user so
