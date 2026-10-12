@@ -21,6 +21,30 @@ function Login() {
     setLoading(true);
 
     try {
+      if (email.trim().toLowerCase() === "admin@aiinterviewprep.com") {
+        const response = await fetch(`${API_URL}/api/admin/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Admin login failed");
+        }
+
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("adminUser", JSON.stringify(data.admin));
+        navigate("/admin");
+        return;
+      }
+
       const response = await fetch(
         `${API_URL}/api/auth/login`,
         {
@@ -152,15 +176,31 @@ function Login() {
 
         {/* Signup */}
         <div className="login-footer">
-
           <p>
             Don't have an account?
-
             <Link to="/signup">
               Create Account
             </Link>
           </p>
 
+          <div style={{ marginTop: "14px", paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <Link
+              to="/admin/login"
+              style={{
+                color: "#64748b",
+                fontSize: "13px",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                transition: "color 0.2s ease"
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#38bdf8")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#64748b")}
+            >
+              🔒 Admin Portal
+            </Link>
+          </div>
         </div>
 
       </div>
