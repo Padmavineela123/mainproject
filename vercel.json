@@ -1,4 +1,6 @@
 {
+  "buildCommand": "cd minor/client && npm install && npm run build",
+  "outputDirectory": "minor/client/dist",
   "rewrites": [
     {
       "source": "/(.*)",
