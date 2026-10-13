@@ -16,6 +16,8 @@ import {
   Brain,
   Timer,
   Lightbulb,
+  BarChart2,
+  X,
 } from "lucide-react";
 
 import "./AdvancedAptitude.css";
@@ -29,8 +31,8 @@ function AdvancedAptitude() {
   // TEST CONFIGURATION
   // =====================================================
 
-  // 30 minutes
-  const TEST_DURATION = 30 * 60;
+  // 60 minutes
+  const TEST_DURATION = 60 * 60;
 
   // =====================================================
   // QUESTIONS
@@ -59,6 +61,9 @@ function AdvancedAptitude() {
     useState([]);
 
   const [showQuestionMenu, setShowQuestionMenu] =
+    useState(false);
+
+  const [showSidePanel, setShowSidePanel] =
     useState(false);
 
   const [timeLeft, setTimeLeft] =
@@ -1065,6 +1070,17 @@ function AdvancedAptitude() {
 
         <div className="header-actions">
 
+          {/* MOBILE SIDE PANEL TOGGLE */}
+          <button
+            type="button"
+            className="mobile-panel-toggle-btn"
+            onClick={() => setShowSidePanel((prev) => !prev)}
+            aria-label="Toggle test overview panel"
+          >
+            <BarChart2 size={17} />
+            <span>Overview</span>
+          </button>
+
           {/* QUESTION MENU */}
 
           <div className="question-menu">
@@ -1448,7 +1464,36 @@ function AdvancedAptitude() {
             RIGHT SIDEBAR
         ============================================= */}
 
-        <aside className="question-sidebar">
+        {/* Mobile side panel overlay */}
+        {showSidePanel && (
+          <div
+            className="mobile-side-panel-overlay"
+            onClick={() => setShowSidePanel(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        <aside
+          className={`question-sidebar ${
+            showSidePanel ? "mobile-panel-open" : ""
+          }`}
+        >
+
+          {/* Mobile Panel Header */}
+          <div className="mobile-panel-header">
+            <div className="mobile-panel-header-title">
+              <BarChart2 size={18} />
+              <span>Test Overview</span>
+            </div>
+            <button
+              type="button"
+              className="mobile-panel-close-btn"
+              onClick={() => setShowSidePanel(false)}
+              aria-label="Close side panel"
+            >
+              <X size={20} />
+            </button>
+          </div>
 
           <div className="sidebar-card">
 

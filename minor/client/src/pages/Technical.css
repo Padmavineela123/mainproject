@@ -275,6 +275,50 @@
    SIDEBAR
 ===================================================== */
 
+.technical-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 998;
+}
+
+.technical-mobile-sidebar-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.technical-mobile-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #60a5fa;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.technical-mobile-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.technical-mobile-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
 .technical-sidebar {
   position: fixed;
 
@@ -1479,7 +1523,28 @@
 @media (max-width: 800px) {
 
   .technical-sidebar {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -270px;
+    width: 260px;
+    height: 100vh;
+    z-index: 1000;
+    background: #0a1128;
+    transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 18px 14px;
+    box-shadow: none;
+  }
+
+  .technical-sidebar.technical-sidebar-open {
+    left: 0;
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.6);
+  }
+
+  .technical-mobile-sidebar-header {
+    display: flex;
   }
 
   .technical-content {

@@ -109,6 +109,8 @@ function Technical() {
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const [showNavigation, setShowNavigation] =
     useState(false);
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
   const [isSubmitting, setIsSubmitting] =
     useState(false);
   const [profileMenuOpen, setProfileMenuOpen] =
@@ -665,6 +667,8 @@ function Technical() {
           <button
             className="technical-menu-button"
             type="button"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
           >
             <Menu size={25} />
           </button>
@@ -761,53 +765,114 @@ function Technical() {
 
         </header>
 
+        {/* MOBILE OVERLAY */}
+        {sidebarOpen && (
+          <div
+            className="technical-sidebar-overlay"
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
         {/* SIDEBAR */}
 
-        <aside className="technical-sidebar">
+        <aside className={`technical-sidebar ${sidebarOpen ? "technical-sidebar-open" : ""}`}>
+
+          {/* Mobile Header */}
+          <div className="technical-mobile-sidebar-header">
+            <div className="technical-mobile-sidebar-brand">
+              <Brain size={26} />
+              <span>AI Interview Prep</span>
+            </div>
+            <button
+              type="button"
+              className="technical-mobile-close"
+              onClick={() => setSidebarOpen(false)}
+              aria-label="Close navigation menu"
+            >
+              <X size={22} />
+            </button>
+          </div>
 
           <nav className="tech-nav">
 
-            <Link to="/dashboard" className="tech-side-item">
+            <Link
+              to="/dashboard"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <HomeIcon size={20} />
               <span>Dashboard</span>
             </Link>
 
-            <Link to="/aptitude" className="tech-side-item">
+            <Link
+              to="/aptitude"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <Target size={20} />
               <span>Aptitude</span>
             </Link>
 
-            <Link to="/technical" className="tech-side-item tech-active">
+            <Link
+              to="/technical"
+              className="tech-side-item tech-active"
+              onClick={() => setSidebarOpen(false)}
+            >
               <Code2 size={20} />
               <span>Technical</span>
             </Link>
 
-            <Link to="/coding" className="tech-side-item">
+            <Link
+              to="/coding"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <Laptop size={20} />
               <span>Coding</span>
             </Link>
 
-            <Link to="/hr-interview" className="tech-side-item">
+            <Link
+              to="/hr-interview"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <MessageSquare size={20} />
               <span>HR Interview</span>
             </Link>
 
-            <Link to="/results" className="tech-side-item">
+            <Link
+              to="/results"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <BarChart3 size={20} />
               <span>Results</span>
             </Link>
 
-            <Link to="/practice-history" className="tech-side-item">
+            <Link
+              to="/practice-history"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <History size={20} />
               <span>Practice History</span>
             </Link>
 
-            <Link to="/profile" className="tech-side-item">
+            <Link
+              to="/profile"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <User size={20} />
               <span>Profile</span>
             </Link>
 
-            <Link to="/settings" className="tech-side-item">
+            <Link
+              to="/settings"
+              className="tech-side-item"
+              onClick={() => setSidebarOpen(false)}
+            >
               <Settings size={20} />
               <span>Settings</span>
             </Link>
@@ -816,6 +881,7 @@ function Technical() {
               to="/login"
               className="tech-side-item tech-logout"
               onClick={() => {
+                setSidebarOpen(false);
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
               }}

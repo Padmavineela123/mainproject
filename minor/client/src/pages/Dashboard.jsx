@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Brain,
   Menu,
+  X,
   Bell,
   ChevronDown,
   Home,
@@ -34,6 +35,7 @@ function Dashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // =====================================
   // VERIFY LOGIN WITH BACKEND
@@ -135,7 +137,12 @@ function Dashboard() {
 
           <h2>AI Interview Prep</h2>
 
-          <button className="menu-button">
+          <button
+            type="button"
+            className="menu-button"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
+          >
             <Menu size={25} />
           </button>
         </div>
@@ -227,15 +234,43 @@ function Dashboard() {
 
 
       {/* =========================
+          MOBILE OVERLAY
+      ========================= */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* =========================
           SIDEBAR
       ========================= */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`}>
+
+        {/* Mobile Header */}
+        <div className="mobile-sidebar-header">
+          <div className="mobile-sidebar-brand">
+            <Brain size={26} />
+            <span>AI Interview Prep</span>
+          </div>
+          <button
+            type="button"
+            className="mobile-sidebar-close"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close navigation menu"
+          >
+            <X size={22} />
+          </button>
+        </div>
 
         <nav className="sidebar-menu">
 
           <Link
             to="/dashboard"
             className="sidebar-item active"
+            onClick={() => setSidebarOpen(false)}
           >
             <Home size={22} />
             <span>Dashboard</span>
@@ -244,6 +279,7 @@ function Dashboard() {
           <Link
             to="/aptitude"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Target size={22} />
             <span>Aptitude</span>
@@ -252,6 +288,7 @@ function Dashboard() {
           <Link
             to="/technical"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Code2 size={22} />
             <span>Technical</span>
@@ -260,6 +297,7 @@ function Dashboard() {
           <Link
             to="/coding"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Laptop size={22} />
             <span>Coding</span>
@@ -268,6 +306,7 @@ function Dashboard() {
           <Link
             to="/hr-interview"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <MessageSquare size={22} />
             <span>HR Interview</span>
@@ -276,6 +315,7 @@ function Dashboard() {
           <Link
             to="/results"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <BarChart3 size={22} />
             <span>Results</span>
@@ -284,6 +324,7 @@ function Dashboard() {
           <Link
             to="/practice-history"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <History size={22} />
             <span>Practice History</span>
@@ -292,6 +333,7 @@ function Dashboard() {
           <Link
             to="/profile"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <User size={22} />
             <span>Profile</span>
@@ -300,13 +342,17 @@ function Dashboard() {
           <Link
             to="/settings"
             className="sidebar-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Settings size={22} />
             <span>Settings</span>
           </Link>
 
           <button
-            onClick={handleLogout}
+            onClick={() => {
+              setSidebarOpen(false);
+              handleLogout();
+            }}
             className="sidebar-item logout"
             style={{
               border: "none",

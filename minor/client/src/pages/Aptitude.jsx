@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Brain,
   Menu,
+  X,
   Bell,
   ChevronDown,
   Home,
@@ -30,6 +31,7 @@ function Aptitude() {
     try { return JSON.parse(localStorage.getItem("user") || "null"); } catch { return null; }
   });
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -57,7 +59,8 @@ function Aptitude() {
           <button
             className="apt-menu"
             type="button"
-            aria-label="Open menu"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
           >
             <Menu size={25} />
           </button>
@@ -148,9 +151,36 @@ function Aptitude() {
 
 
       {/* =====================================================
+          MOBILE OVERLAY
+      ===================================================== */}
+      {sidebarOpen && (
+        <div
+          className="apt-sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* =====================================================
           SIDEBAR
       ===================================================== */}
-      <aside className="apt-sidebar">
+      <aside className={`apt-sidebar ${sidebarOpen ? "apt-sidebar-open" : ""}`}>
+
+        {/* Mobile Header */}
+        <div className="apt-mobile-sidebar-header">
+          <div className="apt-mobile-sidebar-brand">
+            <Brain size={26} />
+            <span>AI Interview Prep</span>
+          </div>
+          <button
+            type="button"
+            className="apt-mobile-close"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close navigation menu"
+          >
+            <X size={22} />
+          </button>
+        </div>
 
         <nav>
 
@@ -158,6 +188,7 @@ function Aptitude() {
           <Link
             to="/dashboard"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Home size={21} />
             <span>Dashboard</span>
@@ -168,6 +199,7 @@ function Aptitude() {
           <Link
             to="/aptitude"
             className="apt-side-item apt-active"
+            onClick={() => setSidebarOpen(false)}
           >
             <Target size={21} />
             <span>Aptitude</span>
@@ -177,6 +209,7 @@ function Aptitude() {
           <Link
             to="/technical"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Code2 size={21} />
             <span>Technical</span>
@@ -187,6 +220,7 @@ function Aptitude() {
           <Link
             to="/coding"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Laptop size={21} />
             <span>Coding</span>
@@ -197,6 +231,7 @@ function Aptitude() {
           <Link
             to="/hr-interview"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <MessageSquare size={21} />
             <span>HR Interview</span>
@@ -206,6 +241,7 @@ function Aptitude() {
           <Link
             to="/results"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <BarChart3 size={21} />
             <span>Results</span>
@@ -216,6 +252,7 @@ function Aptitude() {
           <Link
             to="/practice-history"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <History size={21} />
             <span>Practice History</span>
@@ -226,6 +263,7 @@ function Aptitude() {
           <Link
             to="/profile"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <User size={21} />
             <span>Profile</span>
@@ -236,6 +274,7 @@ function Aptitude() {
           <Link
             to="/settings"
             className="apt-side-item"
+            onClick={() => setSidebarOpen(false)}
           >
             <Settings size={21} />
             <span>Settings</span>
@@ -246,6 +285,10 @@ function Aptitude() {
           <Link
             to="/login"
             className="apt-side-item apt-logout"
+            onClick={() => {
+              setSidebarOpen(false);
+              handleLogout();
+            }}
           >
             <LogOut size={21} />
             <span>Logout</span>
