@@ -1,0 +1,7 @@
+{
+  "name": "mainproject-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "cd minor/client && npm install && npm run build"
+  }
+}
