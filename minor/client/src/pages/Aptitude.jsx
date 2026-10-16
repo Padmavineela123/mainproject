@@ -32,6 +32,20 @@ function Aptitude() {
   });
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+
+  const getNotifications = () => {
+    const notes = [];
+    const basicCorrect = Number(localStorage.getItem("aptitudeBasicsCorrect") || 0);
+    const advCorrect = Number(localStorage.getItem("aptitudeAdvancedCorrect") || 0);
+    if (basicCorrect > 0 || advCorrect > 0) {
+      notes.push({ id: 1, text: `You scored ${basicCorrect + advCorrect} correct answers across aptitude rounds. Keep practicing!`, time: "Recent" });
+    }
+    notes.push({ id: 2, text: "Try the Verbal Aptitude round to improve your language skills.", time: "Suggestion" });
+    notes.push({ id: 3, text: "Complete all rounds to unlock your full performance report.", time: "Tip" });
+    return notes;
+  };
+  const notifications = getNotifications();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -73,9 +87,31 @@ function Aptitude() {
           {/* Notification */}
           <div className="apt-notification">
 
-            <Bell size={23} />
+            <button
+              type="button"
+              className="apt-notification-btn"
+              onClick={() => { setNotificationOpen((prev) => !prev); setProfileMenuOpen(false); }}
+              aria-label="Notifications"
+            >
+              <Bell size={23} />
+              {notifications.length > 0 && (
+                <span className="apt-notification-badge">
+                  {notifications.length}
+                </span>
+              )}
+            </button>
 
-            <span>3</span>
+            {notificationOpen && (
+              <div className="apt-notification-dropdown">
+                <div className="apt-notification-header">Notifications</div>
+                {notifications.map((n) => (
+                  <div key={n.id} className="apt-notification-item">
+                    <div>{n.text}</div>
+                    <div className="apt-notification-time">{n.time}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
           </div>
 

@@ -83,30 +83,104 @@
 
 .apt-notification {
     position: relative;
-    color: #cbd5e1;
-}
-
-.apt-notification span {
-    position: absolute;
-
-    top: -7px;
-    right: -8px;
-
-    width: 18px;
-    height: 18px;
-
-    border-radius: 50%;
-
-    background: #ef4444;
-
-    color: #fff;
-
-    font-size: 11px;
-    font-weight: 700;
-
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.apt-notification-btn {
+    width: 42px;
+    height: 42px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5e1;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.apt-notification-btn:hover {
+    background: rgba(99, 102, 241, 0.18);
+    color: #ffffff;
+}
+
+.apt-notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.apt-notification-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 320px;
+    background: #0a1128;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    z-index: 1200;
+    overflow: hidden;
+    animation: aptDropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes aptDropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.apt-notification-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    font-size: 15px;
+    color: #f1f5f9;
+}
+
+.apt-notification-item {
+    padding: 13px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 13px;
+    line-height: 1.5;
+    color: #cbd5e1;
+    transition: background 0.15s ease;
+}
+
+.apt-notification-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.apt-notification-item:last-child {
+    border-bottom: none;
+}
+
+.apt-notification-time {
+    font-size: 11px;
+    color: #38bdf8;
+    font-weight: 600;
+    margin-top: 5px;
 }
 
 /* Profile wrapper (relative container for dropdown) */
