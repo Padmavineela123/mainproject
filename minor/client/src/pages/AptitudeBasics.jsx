@@ -1314,7 +1314,7 @@ function AptitudeBasics() {
 
                   <span>
                     <i className="legend-current"></i>
-                    Current
+                    Correct
                   </span>
 
                   <span>

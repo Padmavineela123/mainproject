@@ -1199,7 +1199,7 @@ function AdvancedAptitude() {
 
                   <span>
                     <i className="legend-current" />
-                    Corrent
+                    Correct
                   </span>
 
                   <span>

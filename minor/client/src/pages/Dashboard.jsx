@@ -36,6 +36,38 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+
+  /* ── Dynamic notifications based on practice data ── */
+  const getNotifications = () => {
+    const notes = [];
+    const basicCorrect = Number(localStorage.getItem("aptitudeBasicsCorrect") || 0);
+    const advCorrect = Number(localStorage.getItem("aptitudeAdvancedCorrect") || 0);
+
+    if (basicCorrect > 0 || advCorrect > 0) {
+      notes.push({
+        id: 1,
+        text: `You scored ${basicCorrect + advCorrect} correct answers across aptitude rounds. Keep practicing!`,
+        time: "Recent",
+      });
+    }
+
+    notes.push({
+      id: 2,
+      text: "Try the Verbal Aptitude round to improve your language skills.",
+      time: "Suggestion",
+    });
+
+    notes.push({
+      id: 3,
+      text: "Complete all rounds to unlock your full performance report.",
+      time: "Tip",
+    });
+
+    return notes;
+  };
+
+  const notifications = getNotifications();
 
   // =====================================
   // VERIFY LOGIN WITH BACKEND
@@ -149,9 +181,80 @@ function Dashboard() {
 
         <div className="navbar-right">
 
-          <div className="notification">
-            <Bell size={24} />
-            <span>3</span>
+          <div className="notification" style={{ position: "relative" }}>
+            <button
+              type="button"
+              onClick={() => {
+                setNotificationOpen((prev) => !prev);
+                setProfileMenuOpen(false);
+              }}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "inherit",
+                position: "relative",
+                padding: "4px",
+              }}
+              aria-label="Notifications"
+            >
+              <Bell size={24} />
+              {notifications.length > 0 && (
+                <span>{notifications.length}</span>
+              )}
+            </button>
+
+            {notificationOpen && (
+              <div
+                className="notification-dropdown"
+                style={{
+                  position: "absolute",
+                  top: "110%",
+                  right: 0,
+                  width: "320px",
+                  background: "var(--card-bg, #1a1a2e)",
+                  borderRadius: "12px",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+                  zIndex: 999,
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "14px 16px",
+                    borderBottom: "1px solid rgba(255,255,255,0.1)",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  Notifications
+                </div>
+
+                {notifications.map((n) => (
+                  <div
+                    key={n.id}
+                    style={{
+                      padding: "12px 16px",
+                      borderBottom: "1px solid rgba(255,255,255,0.05)",
+                      fontSize: "13px",
+                      lineHeight: "1.5",
+                    }}
+                  >
+                    <div>{n.text}</div>
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        opacity: 0.5,
+                        marginTop: "4px",
+                      }}
+                    >
+                      {n.time}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="student-profile-wrapper">
