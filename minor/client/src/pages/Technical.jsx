@@ -14,6 +14,7 @@ import {
 import {
   ArrowRight,
   ArrowLeft,
+  Bell,
   Brain,
   BarChart3,
   CheckCircle2,
@@ -115,6 +116,21 @@ function Technical() {
     useState(false);
   const [profileMenuOpen, setProfileMenuOpen] =
     useState(false);
+  const [notificationOpen, setNotificationOpen] =
+    useState(false);
+
+  const getNotifications = () => {
+    const notes = [];
+    const basicCorrect = Number(localStorage.getItem("aptitudeBasicsCorrect") || 0);
+    const advCorrect = Number(localStorage.getItem("aptitudeAdvancedCorrect") || 0);
+    if (basicCorrect > 0 || advCorrect > 0) {
+      notes.push({ id: 1, text: `You scored ${basicCorrect + advCorrect} correct answers across aptitude rounds. Keep practicing!`, time: "Recent" });
+    }
+    notes.push({ id: 2, text: "Try practicing coding and DSA questions to improve problem solving.", time: "Suggestion" });
+    notes.push({ id: 3, text: "Complete all technical sections to test your full stack knowledge.", time: "Tip" });
+    return notes;
+  };
+  const notifications = getNotifications();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -675,13 +691,33 @@ function Technical() {
 
           <div className="technical-user-area">
 
-            <div className="technical-notification">
+            <div className="technical-notification" style={{ position: "relative" }}>
 
-              <span className="notification-number">
-                3
-              </span>
+              <button
+                type="button"
+                onClick={() => { setNotificationOpen((prev) => !prev); setProfileMenuOpen(false); }}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", position: "relative", padding: "4px", display: "flex", alignItems: "center" }}
+                aria-label="Notifications"
+              >
+                <Bell size={22} />
+                {notifications.length > 0 && (
+                  <span className="notification-number">
+                    {notifications.length}
+                  </span>
+                )}
+              </button>
 
-              🔔
+              {notificationOpen && (
+                <div style={{ position: "absolute", top: "110%", right: 0, width: "320px", background: "var(--card-bg, #1a1a2e)", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.4)", zIndex: 999, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", textAlign: "left" }}>
+                  <div style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255,255,255,0.1)", fontWeight: 600, fontSize: "15px" }}>Notifications</div>
+                  {notifications.map((n) => (
+                    <div key={n.id} style={{ padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,0.05)", fontSize: "13px", lineHeight: "1.5" }}>
+                      <div>{n.text}</div>
+                      <div style={{ fontSize: "11px", opacity: 0.5, marginTop: "4px" }}>{n.time}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
             </div>
 
