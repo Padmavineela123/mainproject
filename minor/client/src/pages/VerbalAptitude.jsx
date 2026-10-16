@@ -140,8 +140,8 @@ export default function VerbalAptitude() {
   const choose = (value) => {
     if (!question || submitting) return;
 
-    /* Multiple-answer question */
-    if (Array.isArray(question.answer)) {
+    /* Multiple-answer question (but NOT fill-in-the-blank) */
+    if (Array.isArray(question.answer) && question.type !== "fill") {
       setAnswers((previous) => {
         const current = Array.isArray(previous[question.id])
           ? previous[question.id]
