@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -104,6 +105,12 @@ function RedirectIfAuthenticated({ children }) {
 }
 
 function App() {
+  // Pre-warm backend API server as soon as the application is launched
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    fetch(`${API_URL}/`, { method: "GET" }).catch(() => {});
+  }, []);
+
   return (
     <BrowserRouter>
 

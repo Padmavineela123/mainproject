@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Brain, UserPlus } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Brain, UserPlus, CheckCircle2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -14,12 +14,19 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Pre-warm the backend server on page load to eliminate cold-start latency
+  useEffect(() => {
+    fetch(`${API_URL}/`, { method: "GET" }).catch(() => {});
+  }, []);
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
     setError("");
+    setSuccess("");
 
     // Check password match
     if (password !== confirmPassword) {
@@ -45,7 +52,7 @@ function Signup() {
           },
           body: JSON.stringify({
             name: name.trim(),
-            email: email.trim(),
+            email: email.trim().toLowerCase(),
             password,
             confirmPassword,
           }),
@@ -60,12 +67,20 @@ function Signup() {
         );
       }
 
-      // Signup successful
-      alert("Account created successfully!");
+      setSuccess("Account created successfully! Logging you in...");
 
-      // Go to Login page
-      navigate("/login");
-
+      // If token is returned, log in directly without requiring a second manual login step
+      if (data.token && data.user) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 500);
+      } else {
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
     } catch (error) {
       setError(error.message);
     } finally {
@@ -148,6 +163,30 @@ function Signup() {
               required
             />
           </div>
+
+          {/* Success Message */}
+          {success && (
+            <div
+              style={{
+                color: "#6ee7b7",
+                background: "rgba(16, 185, 129, 0.2)",
+                border: "1px solid rgba(16, 185, 129, 0.45)",
+                borderRadius: "10px",
+                padding: "10px 14px",
+                fontSize: "14px",
+                fontWeight: 600,
+                marginBottom: "15px",
+                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+              }}
+            >
+              <CheckCircle2 size={18} />
+              {success}
+            </div>
+          )}
 
           {/* Error Message */}
           {error && (

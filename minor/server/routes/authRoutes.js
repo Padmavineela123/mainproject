@@ -7,6 +7,8 @@ import {
 } from "../controllers/authController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
+import User from "../models/User.js";
+
 const router = express.Router();
 
 router.post("/signup", signup);
@@ -17,11 +19,9 @@ router.get("/me", authMiddleware, async (req, res) => {
   // The JWT only contains id/role. Fetch the current user so
   // name and email always stay synchronized with the logged-in account.
   try {
-    const User = (await import("../models/User.js")).default;
-
     const user = await User.findById(req.user.id).select(
       "_id name email role"
-    );
+    ).lean();
 
     if (!user) {
       return res.status(404).json({

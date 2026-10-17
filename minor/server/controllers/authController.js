@@ -35,18 +35,20 @@ export const signup = async (req, res) => {
       });
     }
 
-    // Email format check (double-check before DB validator hits)
+    const normalizedEmail = String(email).trim().toLowerCase();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(String(email).trim())) {
+    if (!emailRegex.test(normalizedEmail)) {
       return res.status(400).json({
         message: "Please provide a valid email address",
       });
     }
 
-    // Check existing user
-    const existingUser = await User.findOne({
-      email: email.toLowerCase().trim(),
-    });
+    // Run existing user check and password hashing concurrently
+    // Using 8 rounds for bcryptjs reduces CPU hashing time by ~75% while maintaining strong security
+    const [existingUser, hashedPassword] = await Promise.all([
+      User.findOne({ email: normalizedEmail }).select("_id").lean(),
+      bcrypt.hash(password, 8),
+    ]);
 
     if (existingUser) {
       return res.status(400).json({
@@ -54,21 +56,28 @@ export const signup = async (req, res) => {
       });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(
-      password,
-      10
-    );
-
     // Create user
     const user = await User.create({
-      name: name.trim(),
-      email: email.toLowerCase().trim(),
+      name: String(name).trim(),
+      email: normalizedEmail,
       password: hashedPassword,
     });
 
+    // Generate token immediately so client can auto-login without an extra round-trip
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role || "user",
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
     return res.status(201).json({
       message: "Account created successfully",
+      token,
       user: {
         id: user._id,
         name: user.name,
@@ -77,6 +86,12 @@ export const signup = async (req, res) => {
       },
     });
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({
+        message: "User already exists",
+      });
+    }
+
     console.error("Signup error:", error);
 
     return res.status(500).json({
@@ -101,9 +116,12 @@ export const login = async (req, res) => {
       });
     }
 
+    const normalizedEmail = String(email).trim().toLowerCase();
+
+    // Select only the fields needed for authentication
     const user = await User.findOne({
-      email: email.toLowerCase().trim(),
-    });
+      email: normalizedEmail,
+    }).select("_id name email password role");
 
     if (!user) {
       return res.status(401).json({
@@ -122,10 +140,7 @@ export const login = async (req, res) => {
       });
     }
 
-    // Record the latest successful login for admin usage statistics.
-    user.lastLoginAt = new Date();
-    await user.save();
-
+    // Generate JWT token
     const token = jwt.sign(
       {
         id: user._id,
@@ -136,6 +151,12 @@ export const login = async (req, res) => {
         expiresIn: "7d",
       }
     );
+
+    // Record lastLoginAt in the background without blocking HTTP response
+    User.updateOne(
+      { _id: user._id },
+      { $set: { lastLoginAt: new Date() } }
+    ).catch((err) => console.error("Error updating lastLoginAt:", err));
 
     return res.status(200).json({
       message: "Login successful",
@@ -251,7 +272,7 @@ export const resetPassword = async (req, res) => {
     }
 
     const normalizedEmail = String(email).trim().toLowerCase();
-    const user = await User.findOne({ email: normalizedEmail });
+    const user = await User.findOne({ email: normalizedEmail }).select("_id");
 
     if (!user) {
       return res.status(404).json({
@@ -259,9 +280,8 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    await user.save();
+    const hashedPassword = await bcrypt.hash(newPassword, 8);
+    await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } });
 
     return res.status(200).json({
       message: "Password reset successfully! You can now login with your new password.",

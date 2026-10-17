@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Brain, LogIn, KeyRound, ArrowLeft, CheckCircle2 } from "lucide-react";
 import "./Login.css";
@@ -22,6 +22,11 @@ function Login() {
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotError, setForgotError] = useState("");
   const [forgotSuccess, setForgotSuccess] = useState("");
+
+  // Pre-warm the backend server on mount to eliminate cold-start latency
+  useEffect(() => {
+    fetch(`${API_URL}/`, { method: "GET" }).catch(() => {});
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
