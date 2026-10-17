@@ -9,7 +9,6 @@ import {
   UserRound,
   Clock,
   Mic,
-  MicOff,
   PenLine,
   ChevronLeft,
   ChevronRight,
@@ -18,7 +17,6 @@ import {
   Lock,
   Send,
   XCircle,
-  Play,
   Square,
   Trash2,
 } from "lucide-react";
@@ -74,7 +72,7 @@ export default function HR() {
 
   const [recording, setRecording] = useState(false);
   const [audioUrls, setAudioUrls] = useState({});
-  const [audioBlobs, setAudioBlobs] = useState({});
+  const [, setAudioBlobs] = useState({});
   const [recordingTime, setRecordingTime] = useState(0);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -184,7 +182,6 @@ export default function HR() {
   // --------------------------------------------------
   // RESET ROUND
   // Intentionally resets state when the round changes.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setTimeLeft(QUESTION_TIME);
 
@@ -251,7 +248,7 @@ export default function HR() {
     ) {
       try {
         mediaRecorderRef.current.stop();
-      } catch (_error) {
+      } catch {
         // Ignore stop errors
       }
     }
@@ -449,7 +446,7 @@ export default function HR() {
         setQuestionFeedback({ success: false, message: reason });
         setError(reason);
       }
-    } catch (_evalError) {
+    } catch {
       setError("AI analysis encountered an error. Please try again.");
     } finally {
       setEvaluatingAnswer(false);

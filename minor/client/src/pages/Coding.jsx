@@ -233,13 +233,13 @@ function Coding() {
             const combined = Array.from(new Set([...prev, ...solvedFromHistory]));
             try {
               localStorage.setItem("solvedCodingProblems", JSON.stringify(combined));
-            } catch (err) {
+            } catch {
               // Ignore storage errors
             }
             return combined;
           });
         }
-      } catch (err) {
+      } catch {
         // Silently catch network errors
       }
     };
@@ -488,7 +488,7 @@ function Coding() {
             const updated = [...prev, problemKey];
             try {
               localStorage.setItem("solvedCodingProblems", JSON.stringify(updated));
-            } catch (err) {
+            } catch {
               // Ignore storage errors
             }
             return updated;
@@ -701,7 +701,7 @@ function Coding() {
             const updated = [...prev, problemKey];
             try {
               localStorage.setItem("solvedCodingProblems", JSON.stringify(updated));
-            } catch (err) {
+            } catch {
               // Ignore storage errors
             }
             return updated;

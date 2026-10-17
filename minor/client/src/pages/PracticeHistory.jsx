@@ -11,7 +11,6 @@ import {
   Code2,
   Laptop,
   MessageSquare,
-  BarChart3,
   History,
   User,
   Settings,

@@ -748,7 +748,7 @@ function Result() {
         completedRounds.length
     );
 
-  }, [results]);
+  }, [completedRounds]);
 
 
   /* =======================================================

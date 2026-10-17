@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -29,7 +29,7 @@ export default function VerbalAptitude() {
      Every new test session gets a different question order.
   ========================================================= */
 
-  const questions = useMemo(() => {
+  const [questions] = useState(() => {
     const copy = [...verbalQuestions];
 
     for (let i = copy.length - 1; i > 0; i--) {
@@ -39,7 +39,7 @@ export default function VerbalAptitude() {
     }
 
     return copy.slice(0, ROUND_SIZE);
-  }, []);
+  });
 
   /* =========================================================
      STATES

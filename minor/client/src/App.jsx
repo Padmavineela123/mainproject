@@ -32,6 +32,22 @@ import AdminDashboard from "./admin/AdminDashboard";
    GUARDS
    ========================================================= */
 
+function getUserFromStorage() {
+  try {
+    return JSON.parse(localStorage.getItem("user") || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function getAdminUserFromStorage() {
+  try {
+    return JSON.parse(localStorage.getItem("adminUser") || "{}");
+  } catch {
+    return {};
+  }
+}
+
 function RequireAuth({ children }) {
   const token =
     typeof localStorage !== "undefined"
@@ -42,13 +58,9 @@ function RequireAuth({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  try {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    if (user.role === "admin") {
-      return <Navigate to="/admin" replace />;
-    }
-  } catch {
-    // ignore parse error
+  const user = getUserFromStorage();
+  if (user.role === "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   return children;
@@ -60,18 +72,12 @@ function RequireAdmin({ children }) {
       ? localStorage.getItem("adminToken") || localStorage.getItem("token")
       : null;
 
-  try {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const adminUser = JSON.parse(localStorage.getItem("adminUser") || "{}");
-    const isAdmin = user.role === "admin" || adminUser.role === "admin";
+  const user = getUserFromStorage();
+  const adminUser = getAdminUserFromStorage();
+  const isAdmin = user.role === "admin" || adminUser.role === "admin";
 
-    if (!adminToken || !isAdmin) {
-      return <Navigate to="/admin/login" replace />;
-    }
-  } catch {
-    if (!adminToken) {
-      return <Navigate to="/admin/login" replace />;
-    }
+  if (!adminToken || !isAdmin) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   return children;
@@ -87,14 +93,10 @@ function RedirectIfAuthenticated({ children }) {
       ? localStorage.getItem("adminToken")
       : null;
 
-  try {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const adminUser = JSON.parse(localStorage.getItem("adminUser") || "{}");
-    if (adminToken || user.role === "admin" || adminUser.role === "admin") {
-      return <Navigate to="/admin" replace />;
-    }
-  } catch {
-    // fallback
+  const user = getUserFromStorage();
+  const adminUser = getAdminUserFromStorage();
+  if (adminToken || user.role === "admin" || adminUser.role === "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   if (token) {
